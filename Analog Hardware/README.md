@@ -15,3 +15,11 @@ Design choices:
 
 Power planes: a ground and 12 Volt plane were used in order to minimize the impedance between the power supply and components
 Motor Traces: the PCB traces supplying the motor with power were made very thick in order to minimize resistance
+
+Headers: an identical pair of headers was used for the motor connections, one was connected to the motor and one proved useful for debugging because it allowed us to probe the motors encoder pulses and power signals. A pure 5 Volt and 12 Volt header were also included to allow us to get 5 Volt or 12 Volt power easily to anywhere. This also served as an additional header to which we could attach capacitors for filtering the power signals. 
+
+PCB shape: the PCB's edges were clipped in order to avoid having 90 degree edges on our power planes
+
+Motor driver
+
+
