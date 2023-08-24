@@ -38,7 +38,7 @@ There are two other headers one to connect the ultrasonic distance sensor module
 **Decoder crosstalk(main issue):** 
 **How do we know the issue is crosstalk?** The motor's position value that the ESP32 acquired from the decoder+MUX was quite prone to spiking and some digital low pass filtering had to be implemented to tell the PID controller to ignore junk data. If the encoder signals themselves were having problems, the huge spikes would have been stored in the decoder's internal register, but these spikes were transient and the values always settled back to a reasonable one which suggests bits being flipped because of crosstalk on the lines between the decoder and the multiplexer. 
 
-**Why is there crosstalk?** The traces connecting the decoder and multiplexer are so close that some of them don't even have any ground plane separating them to absorb EMI(picture below). In the getByte() function, the select signals of these multiplexers change around once per microsecond so it's unsurprising that these high frequency signals can flip bits on adjacent traces that aren't even shielded from one another, they should have been spaced out more.
+**Why is there crosstalk?** The traces connecting the decoder and multiplexer are so close that some of them don't even have any ground plane separating them to absorb EMI(picture below). In the getByte() function, the select signals of the multiplexer change around once per microsecond so it's unsurprising that high frequency signals can flip bits on adjacent traces that aren't even shielded from one another, they should have been spaced out more.
 
 <img src="https://github.com/PetervandenDoel/Robot-Claw/assets/73015873/e88be956-3e55-42db-9e52-9a0fb076cbaf" width="300" height="200" />
 
