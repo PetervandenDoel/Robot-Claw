@@ -340,7 +340,9 @@ float get_distance(float prev_d) {
   // Prints the distance on the Serial Monitor
   //Serial.print("Distance: ");
   //Serial.println(distance);
-  if(distance>200){ //it spiked
+
+// distance values should never go above 200, this accounts for missed sound reflections on ultrasound sensor
+  if(distance>200){ 
     return (float) prev_d;
     }
     //Serial.println( distance);
