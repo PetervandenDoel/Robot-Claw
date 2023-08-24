@@ -471,8 +471,9 @@ void timerISR()
     start_time = micros();
     float e = pos - desired_position;
 
-    // digital low pass filtering, since position is in units of revolutions, such as spike clearly represents noise
-    if((e-eprev)>0.05){
+    // digital low pass filtering, since position is in units of revolutions, 1/20 revolutions would correspond to a change in error of 53
+    // 1/20 revolutions in the control period of 0.1s corresponds to a speed of 0.5 RPS which is far faster than our motor should ever run
+    if((e-eprev)>53 || (e-eprev)<-53){
       e=eprev;
     }
    
