@@ -39,7 +39,13 @@ There are two other headers one to connect the ultrasonic distance sensor module
 **How do we know the issue is crosstalk?** The motor's position value that the ESP32 acquired from the decoder+MUX was quite prone to spiking and some digital low pass filtering had to be implemented to tell the PID controller to ignore junk data. If the encoder signals themselves were having problems, the huge spikes would have been stored in the decoder's internal register, but these spikes were transient and the values always settled back to a reasonable one which suggests bits being flipped because of crosstalk on the lines between the decoder and the multiplexer. 
 
 **Why is there crosstalk?** The traces connecting the decoder and multiplexer are so close that some of them don't even have any ground plane separating them to absorb EMI(picture below). In the getByte() function, the select signals of these multiplexers change around once per microsecond so it's unsurprising that these high frequency signals can flip bits on adjacent traces that aren't even shielded from one another, they should have been spaced out more.
+
 <img src="https://github.com/PetervandenDoel/Robot-Claw/assets/73015873/e88be956-3e55-42db-9e52-9a0fb076cbaf" width="300" height="200" />
 
+**Unused routing space:** A lot of traces are routed very close together despite the fact that there is actually a lot of space on the board that routing could be done through.
 
 **Crystal is too large, literally:** A very large thru-hole crystal oscillator was chosen for the motor decoder. Seeing how the crystal just clocks digital hardware inside of the decoder, frequency stability and impedance characteristics aren't very important. It would have been wise to compromise on other characteristics in order to get a smaller crystal. 
+
+**Aesthetics:**
+**Non-symmetrical screw holes:** Our professor actually criticized us for this funnily enough. There are two holes for screws on the top of the PCB but not the bottom and the asymmetry is kind of weird.
+**Sporadic name placement:** Our names are placed in random spots all over the PCB wherever we could fit them, we don't have one nice little corner that we put all of them in; it could look a lot better.
