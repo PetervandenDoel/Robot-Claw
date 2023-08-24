@@ -13,7 +13,7 @@ Pictures have been included and below the pictures there is an explanation of de
 
 **Design choices:**
 
-**Power planes:** a ground and 12 Volt plane were used in order to minimize the impedance between the power supply and components
+**Power planes:** a ground(blue) and 12 Volt(red) plane were used in order to minimize the impedance between the power supply and components
 
 **power supply** 12V barrel jack will normally supply power, but there is also a 12V GND header which allows for other power supplies to be used besides just the barrel Jack. The 5V GND header proved useful for providing only digital power when trying to debug our design without actually driving the motor and causing our claw to move; it allowed to test our state machine, decoder, and control system while moving the claw by hand.
 
