@@ -9,7 +9,7 @@ Pictures have been included and below the pictures there is an explanation of de
 <img src="https://github.com/PetervandenDoel/Robot-Claw/assets/73015873/15f82367-69b0-4884-9342-ba6e84c2b8d0" width="400" height="300" />
 
 <img src="https://github.com/PetervandenDoel/Robot-Claw/assets/73015873/8a9e8ee0-6425-4c25-b33c-d96be40cbf88" width="400" height="300" />
-
+j
 
 **Design choices:**
 
