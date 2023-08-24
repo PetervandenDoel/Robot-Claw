@@ -30,6 +30,8 @@ The PCB for all the digital hardware. Below the images is an explanation of desi
 
 There are two other headers one to connect the ultrasonic distance sensor module to the esp, and one that connects to the analog PCB to control the motor and act as a 5V power supply for the digital hardware.
 
+**Silkscreens:** A lot of time was put in to maximally label every pin on every header without violating the PCB manufacturer's silkscreen design rules. Different labels were made different sizes based on the readability of the individual characters at those sizes and thicknesses to preserve space and maximize the amount of labels. These ended up being invaluable for debugging and allowed us, at one point, to use an Arduino mega instead of an ESP32 and connect all the GPIOs to the right pins without much issue.
+
 **Power planes:** A 5V(red) and GND(blue) plane were implemented with the aim of reducing noise, this should have been done differently and will be discussed among potential improvements 
 
 
@@ -43,6 +45,8 @@ There are two other headers one to connect the ultrasonic distance sensor module
 <img src="https://github.com/PetervandenDoel/Robot-Claw/assets/73015873/e88be956-3e55-42db-9e52-9a0fb076cbaf" width="300" height="200" />
 
 **Unused routing space:** A lot of traces are routed very close together despite the fact that there is actually a lot of space on the board that routing could be done through.
+
+**Power planes:** Since this is not a high power circuit, it doesn't make too much sense to have 5V and GND power planes. Instead, it would make more sense to have a ground plane on each layer for noise reduction. 
 
 **Crystal is too large, literally:** A very large thru-hole crystal oscillator was chosen for the motor decoder. Seeing how the crystal just clocks digital hardware inside of the decoder, frequency stability and impedance characteristics aren't very important. It would have been wise to compromise on other characteristics in order to get a smaller crystal. 
 
