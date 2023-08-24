@@ -470,6 +470,13 @@ void timerISR()
     //error
     start_time = micros();
     float e = pos - desired_position;
+
+    // digital low pass filtering, since position is in units of revolutions, such as spike clearly represents noise
+    if((e-eprev)>0.05){
+      e=eprev;
+    }
+   
+    //this is to determine whether or not the PID loop has settled
     if (fabs(e) > 0.016) {
     //finite difference derivative
     float dedt = (e - eprev)/deltaT;
