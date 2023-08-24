@@ -1,3 +1,13 @@
-# Robot-Claw![ELEC 391 Claw](https://github.com/PetervandenDoel/Robot-Claw/assets/73015873/c2eabe40-800b-46fc-973f-f415c8aed564)
+# Robot-Claw
 
-The project demo was not filmed, but a video demo will be uploaded soon once we can get some of the team members back together to film
+The project demo date was not filmed, the video included is us testing its functionality before the claw was fully assembled  
+https://drive.google.com/file/d/1z_p-viNf-aqcb_K7y_1ZdQ1qlZZi11r3/view?usp=sharing
+
+![ELEC 391 Claw](https://github.com/PetervandenDoel/Robot-Claw/assets/73015873/c2eabe40-800b-46fc-973f-f415c8aed564)
+
+
+
+
+
+
+
