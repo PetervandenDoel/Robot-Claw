@@ -16,6 +16,7 @@ The PCB for all the digital hardware. Below the images is an explanation of desi
 <img src="https://github.com/PetervandenDoel/Robot-Claw/assets/73015873/e829cc34-ff70-43ec-9e00-15822eba24f5" width="700" height="400" />
 
 
+
 **Decoder and MUX saving GPIOs:** The motor decoder chip that was chosen counts encoder pulses and returns them as a 32 bit value. The decoder requires a clock which is what the crystal oscillator on the PCB is for. The data is accessed across 8 pins with a 2 bit internal multiplexer to iterate through each set of eight bits to retrieve the 32 bit value. With 8 data pins and four pins for interfacing with it, the decoder requires a total of 12 GPIO pins to function. In order to save on GPIO pins a three bit multiplexer was used which complicated the firmware's get_position() routine, but reduced the number of data pins down from 8 to 3 select pins and 1 data input for a total of only 8 GPIO pins needed to read the motor's position.  
 
 
@@ -29,11 +30,16 @@ The PCB for all the digital hardware. Below the images is an explanation of desi
 
 There are two other headers one to connect the ultrasonic distance sensor module to the esp, and one that connects to the analog PCB to control the motor and act as a 5V power supply for the digital hardware.
 
-**Power planes:** A 5V and GND plane were implemented with the aim of reducing noise, this should have been done differently and will be discussed among potential improvements 
+**Power planes:** A 5V(red) and GND(blue) plane were implemented with the aim of reducing noise, this should have been done differently and will be discussed among potential improvements 
 
 
 **potential improvements**
 
-**Decoder crosstalk:**  
+**Decoder crosstalk(main issue):** 
+**How do we know the issue is crosstalk?** The motor's position value that the ESP32 acquired from the decoder+MUX was quite prone to spiking and some digital low pass filtering had to be implemented to tell the PID controller to ignore junk data. If the encoder signals themselves were having problems, the huge spikes would have been stored in the decoder's internal register, but these spikes were transient and the values always settled back to a reasonable one which suggests bits being flipped because of crosstalk on the lines between the decoder and the multiplexer. 
 
-**Crystal is too large:** A very large through hole crystal oscillator was chosen for the motor decoder. Seeing how the crystal just clocks digital hardware inside of the decoder, frequency stability and impedance characteristics aren't very important. It would have been wise to compromise on other characteristics in order to get a smaller crystal. 
+**Why is there crosstalk?** The traces connecting the decoder and multiplexer are so close that some of them don't even have any ground plane separating them to absorb EMI(picture below). In the getByte() function, the select signals of these multiplexers change around once per microsecond so it's unsurprising that these high frequency signals can flip bits on adjacent traces that aren't even shielded from one another, they should have been spaced out more.
+<img src="https://github.com/PetervandenDoel/Robot-Claw/assets/73015873/e88be956-3e55-42db-9e52-9a0fb076cbaf" width="300" height="200" />
+
+
+**Crystal is too large, literally:** A very large thru-hole crystal oscillator was chosen for the motor decoder. Seeing how the crystal just clocks digital hardware inside of the decoder, frequency stability and impedance characteristics aren't very important. It would have been wise to compromise on other characteristics in order to get a smaller crystal. 
